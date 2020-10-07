@@ -15,9 +15,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int databaseVersion = 1;
     private final String DBName;
-    private SQLiteDatabase DBClass;
     private final Context context;
     private final String DBDirectoryPath;
+    private SQLiteDatabase DBClass;
 
 
     public DatabaseHelper(Context context, final String databaseName, File storageDirectory) {

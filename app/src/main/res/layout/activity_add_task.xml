@@ -12,19 +12,19 @@
         android:id="@+id/nameEditText"
         android:layout_width="300dp"
         android:layout_height="45dp"
+        android:autofillHints=""
         android:background="@drawable/rounded_button_background"
         android:ems="10"
-        android:maxLength="20"
         android:hint="@string/name_hint"
         android:inputType="textPersonName"
+        android:maxLength="20"
         android:textAlignment="center"
         android:textColorHint="#8D8A8F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.106"
-        android:autofillHints="" />
+        app:layout_constraintVertical_bias="0.106" />
 
     <Spinner
         android:id="@+id/typeSpinner"

@@ -13,28 +13,30 @@ import android.widget.Toast;
 
 import com.example.todo2.Contract;
 import com.example.todo2.R;
-import com.example.todo2.model.AddTaskModel;
-import com.example.todo2.presenter.AddTaskPresenter;
+import com.example.todo2.presenterDagger.AddTaskPresenterComponent;
+import com.example.todo2.presenterDagger.DaggerAddTaskPresenterComponent;
+import com.example.todo2.viewDagger.AddTaskActivityModule;
 
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class AddTaskActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, FailedAddTaskFragment.FailedAddTaskFragmentListener, Contract.presenterToAddTaskView {
 
-    private   EditText nameEditText;
-    private   Spinner typeSpinner;
-    private    Button dateButton;
-    private    Button submitButton;
-    private    Button cancelButton;
-
+    @Inject
+    Contract.addTaskViewToPresenter presenter;
+    private EditText nameEditText;
+    private Spinner typeSpinner;
+    private Button dateButton;
+    private Button submitButton;
+    private Button cancelButton;
     //stores user input
-    private    String taskType = null;
-    private   Calendar taskDate = null;
-
-    private Contract.addTaskViewToPresenter presenter;
+    private String taskType = null;
+    private Calendar taskDate = null;
 
     @Override
     public void onInvalidInput(String message) {
@@ -56,8 +58,9 @@ public class AddTaskActivity extends AppCompatActivity implements DatePickerDial
         setContentView(R.layout.activity_add_task);
 
 
-        Contract.addTaskPresenterToModel model = new AddTaskModel();
-        presenter = new AddTaskPresenter(this, model);
+        AddTaskPresenterComponent component = DaggerAddTaskPresenterComponent.builder()
+                .addTaskActivityModule(new AddTaskActivityModule(this)).build();
+        component.inject(this);
 
         //initializing views
         nameEditText = findViewById(R.id.nameEditText);

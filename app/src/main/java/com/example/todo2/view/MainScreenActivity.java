@@ -9,10 +9,14 @@ import android.widget.TextView;
 import com.example.todo2.Contract;
 import com.example.todo2.R;
 import com.example.todo2.model.TaskData;
-import com.example.todo2.presenter.MainScreenPresenter;
+import com.example.todo2.presenterDagger.DaggerMainScreenPresenterComponent;
+import com.example.todo2.presenterDagger.MainScreenPresenterComponent;
+import com.example.todo2.viewDagger.MainScreenActivityModule;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,16 +25,21 @@ import androidx.recyclerview.widget.RecyclerView;
 public class MainScreenActivity extends AppCompatActivity implements Contract.presenterToMainScreenView {
 
 
-    private   TasksRecyclerViewAdapter tasksRecyclerViewAdapter;
-    private    RecyclerView recyclerView;
-    private    TextView noTasksView;
-    private Contract.mainScreenViewToPresenter presenter;
+    @Inject
+    Contract.mainScreenViewToPresenter presenter;
+    private TasksRecyclerViewAdapter tasksRecyclerViewAdapter;
+    private RecyclerView recyclerView;
+    private TextView noTasksView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        MainScreenPresenterComponent component = DaggerMainScreenPresenterComponent.builder()
+                .mainScreenActivityModule(new MainScreenActivityModule(this)).build();
+        component.inject(this);
         //initialize views
         noTasksView = findViewById(R.id.noTasksView);
 
@@ -47,9 +56,6 @@ public class MainScreenActivity extends AppCompatActivity implements Contract.pr
         // set up the RecyclerView
         recyclerView = findViewById(R.id.rvTasks);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-        presenter = new MainScreenPresenter(this);
 
 
     }

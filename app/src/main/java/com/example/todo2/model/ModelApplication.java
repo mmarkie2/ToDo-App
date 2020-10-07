@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.Context;
 
 import java.io.File;
-import java.util.ArrayList;
 
 public class ModelApplication extends Application {
 
@@ -19,18 +18,15 @@ public class ModelApplication extends Application {
         }
 
         //creating helper and testing if db file wont crash app, if so resetting db File
-try
-{
-    ModelApplication.databaseHelper = new DatabaseHelper(ctx, dbFileName, storageDirectory);
+        try {
+            ModelApplication.databaseHelper = new DatabaseHelper(ctx, dbFileName, storageDirectory);
 //tests db
-   ModelApplication.getDatabaseHelper().selectFromTable
-            ("tasks", "id, name, type, year, month, dayOfMonth");
-}
-       catch (Exception e)
-       {
-           fileHelper.copyFile();
-           ModelApplication.databaseHelper = new DatabaseHelper(ctx, dbFileName, storageDirectory);
-       }
+            ModelApplication.getDatabaseHelper().selectFromTable
+                    ("tasks", "id, name, type, year, month, dayOfMonth");
+        } catch (Exception e) {
+            fileHelper.copyFile();
+            ModelApplication.databaseHelper = new DatabaseHelper(ctx, dbFileName, storageDirectory);
+        }
 
 
     }

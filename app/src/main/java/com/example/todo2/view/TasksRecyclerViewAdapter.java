@@ -64,10 +64,10 @@ public class TasksRecyclerViewAdapter extends RecyclerView.Adapter<TasksRecycler
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-          final TextView nameView;
-         final TextView categoryView;
-         final TextView dateView;
-          final Button deleteButton;
+        final TextView nameView;
+        final TextView categoryView;
+        final TextView dateView;
+        final Button deleteButton;
         private final WeakReference<RecyclerDeleteButtonClickListener> listenerRef;
 
         ViewHolder(final View itemView, RecyclerDeleteButtonClickListener listener) {

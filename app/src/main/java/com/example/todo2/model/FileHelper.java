@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 public class FileHelper {
-    private  final String databaseName;
+    private final String databaseName;
     private final String assetsDBPath;
 
     private final File storageDirectory;

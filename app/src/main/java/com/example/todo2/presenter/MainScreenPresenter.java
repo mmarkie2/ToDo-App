@@ -4,7 +4,6 @@ import android.Manifest;
 import android.os.Environment;
 
 import com.example.todo2.Contract;
-import com.example.todo2.model.MainScreenModel;
 import com.example.todo2.model.ModelApplication;
 import com.example.todo2.model.RuntimePermissionHelper;
 import com.example.todo2.model.TaskData;
@@ -13,17 +12,20 @@ import com.example.todo2.model.TaskDataWithId;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 
 public class MainScreenPresenter implements Contract.mainScreenViewToPresenter {
 
 
     private final Contract.presenterToMainScreenView view;
     private final Contract.presenterToMainScreenModel model;
-    private    ArrayList<TaskDataWithId> currentTaskDataWithIds;
+    private ArrayList<TaskDataWithId> currentTaskDataWithIds;
 
-    public MainScreenPresenter(Contract.presenterToMainScreenView view) {
+    @Inject
+    public MainScreenPresenter(Contract.presenterToMainScreenView view, Contract.presenterToMainScreenModel model) {
         this.view = view;
-        model = new MainScreenModel();
+        this.model = model;
         currentTaskDataWithIds = new ArrayList<>();
 
         askForPermissionAndInitializeDBIfAvailable();

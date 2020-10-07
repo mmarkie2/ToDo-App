@@ -5,9 +5,8 @@ import android.content.ContentValues;
 import com.example.todo2.Contract;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
+
 public class AddTaskModel implements Contract.addTaskPresenterToModel {
 
 

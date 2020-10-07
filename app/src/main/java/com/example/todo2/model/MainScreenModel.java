@@ -4,7 +4,13 @@ import com.example.todo2.Contract;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 public class MainScreenModel implements Contract.presenterToMainScreenModel {
+    @Inject
+    public MainScreenModel() {
+    }
+
     //queering ids for deleting purpose
     @Override
     public ArrayList<TaskDataWithId> queryTasks() {

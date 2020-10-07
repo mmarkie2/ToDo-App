@@ -8,11 +8,14 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class AddTaskPresenter implements Contract.addTaskViewToPresenter {
 
     private final Contract.presenterToAddTaskView view;
     private final Contract.addTaskPresenterToModel model;
 
+    @Inject
     public AddTaskPresenter(Contract.presenterToAddTaskView view, Contract.addTaskPresenterToModel model) {
         this.view = view;
         this.model = model;
